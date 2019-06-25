@@ -48,14 +48,14 @@ def user_output_dir():
 
 
 def user_yes_or_no():
-    yes_words = ['Y', 'y', 'yes', 'YES']
-    no_words = ['N', 'n', 'no', 'NO']
+    yes_words = ['Y', 'YES']
+    no_words = ['N', 'NO']
     while True:
         try:
             user_yes_no = input()
-            if user_yes_no in yes_words:
+            if user_yes_no.upper() in yes_words:
                 return "Y"
-            elif user_yes_no in no_words:
+            elif user_yes_no.upper() in no_words:
                 return "N"
             else:
                 print("请输入：Y 或者 N")
@@ -97,7 +97,8 @@ def show_files_in_dir(files_dir):
             temp_index += 1
             print(show_dir)
     if temp_index == 0:
-        print("--没有文件--")
+        # print("--没有文件，退出程序--")
+        exit("--没有文件，退出程序--")
     print("------------")
 
 
@@ -115,6 +116,8 @@ def user_num_input():
 
 def rename(new_str, old_path, new_path, start_index=2, start_seq=1):
     print("重命名进行中: ")
+    if start_index <= 1:
+        start_index = 1
     # path = r"C:\Users\zhanggs\Desktop\test\input"
     # newpath = r"C:\Users\zhanggs\Desktop\test\newFile"
     file_list = os.listdir(old_path)  # 该文件夹下所有的文件（包括文件夹）
@@ -126,7 +129,7 @@ def rename(new_str, old_path, new_path, start_index=2, start_seq=1):
         if os.path.isdir(old_dir):  # 如果是文件夹则跳过
             continue
         filename = os.path.splitext(files)[0]  # 文件名
-        new_name1 = filename[:start_index]
+        new_name1 = filename[:start_index-1]
         new_name2 = new_str
         # if filename[8:16] == new_str: # 如果是指定的日期就跳过该文件
         #     continue
