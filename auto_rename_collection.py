@@ -186,8 +186,8 @@ if __name__ == '__main__':
     index_flag = user_yes_or_no()
     if index_flag == 'Y':
         print("x  请输入整数： ")
-        start_i = user_num_input() + 1
+        start_i = user_num_input()
     else:
-        start_i = 0
+        start_i = 1
     rename(replace_str, path, new_path, start_i, start_seq, is_save)
     print("\n>>>  重命名后的文件保存在："+new_path)
