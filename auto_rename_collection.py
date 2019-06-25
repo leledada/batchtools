@@ -1,4 +1,5 @@
 import os
+import time
 
 
 # 功能点
@@ -10,8 +11,11 @@ import os
 # 6. 尝试对正则替换的支持
 
 # 日志记录功能
-def gen_my_log(msg):
-    file = r'C:\Users\zhanggs\Desktop\test\log-remane20180830.txt'
+def gen_my_log(msg,path):
+    # file = r'C:\Users\zhanggs\Desktop\test\log-remane20180830.txt'
+    log_path = path + '\\log\\'
+    make_dir(log_path)
+    file = log_path + "log" + time.strftime("%Y%m%d%H%M%S", time.localtime()) + ".txt"
     with open(file, 'a+', encoding='utf-8') as f:
         f.write(msg)
 
@@ -44,11 +48,15 @@ def user_output_dir():
 
 
 def user_yes_or_no():
+    yes_words = ['Y', 'y', 'yes', 'YES']
+    no_words = ['N', 'n', 'no', 'NO']
     while True:
         try:
             user_yes_no = input()
-            if user_yes_no == "Y" or user_yes_no == "N" :
-                return user_yes_no
+            if user_yes_no in yes_words:
+                return "Y"
+            elif user_yes_no in no_words:
+                return "N"
             else:
                 print("请输入：Y 或者 N")
         except Exception:
@@ -130,7 +138,7 @@ def rename(new_str, old_path, new_path, start_index=2, start_seq=1):
         i += 1
         msg = old_dir + '重命名完成：' + new_dir
         print(msg)
-        gen_my_log(msg + '\n')
+        gen_my_log(msg + '\n', old_path)
 
 
 # 返回6位左补零点数字字符串
